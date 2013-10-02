@@ -1,0 +1,3 @@
+[submodule "lib/qsome/qsome-core"]
+	path = lib/qsome/qsome-core
+	url = https://github.com/seomoz/qsome-core
