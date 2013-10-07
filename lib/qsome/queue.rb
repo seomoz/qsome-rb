@@ -3,6 +3,7 @@
 require 'qless/queue'
 
 module Qsome
+  # Represents a queue in Qsome
   class Queue < Qless::Queue
     def put(klass, hsh, data, opts = {})
       opts = job_options(klass, data, opts)

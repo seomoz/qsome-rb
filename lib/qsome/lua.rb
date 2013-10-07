@@ -3,6 +3,7 @@
 require 'qless/lua_script'
 
 module Qsome
+  # A wrapper for all of our lua script access
   class LuaScript < Qless::LuaScript
     SCRIPT_ROOT = File.expand_path('../lua', __FILE__)
 

@@ -4,18 +4,19 @@
 require 'json'
 
 # Internal dependencies
-require 'qless'
 require 'qsome/lua'
 require 'qsome/job'
 require 'qsome/queue'
 
 module Qsome
+  # Provides access to all the queues accessible through this client
   class ClientQueues < Qless::ClientQueues
     def [](name)
       Queue.new(name, @client)
     end
   end
 
+  # Provides access to all the jobs accessible through this client
   class ClientJobs < Qless::ClientJobs
     # So we can return a Qsome::Job, not a Qless::Job
     def tracked
@@ -27,10 +28,7 @@ module Qsome
     # So we can return a Qsome::Job, not a Qless::Job
     def get(jid)
       results = @client.call('get', jid)
-      if results.nil?
-        return nil
-      end
-      Job.new(@client, JSON.parse(results))
+      Job.new(@client, JSON.parse(results)) unless results.nil?
     end
 
     # So we can return a Qsome::Job, not a Qless::Job
@@ -42,6 +40,7 @@ module Qsome
     end
   end
 
+  # Client, the gateway to access to a set of queues
   class Client < Qless::Client
     def initialize(options = {})
       super(options)
