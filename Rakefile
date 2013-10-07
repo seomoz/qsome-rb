@@ -18,7 +18,7 @@ namespace :core do
 
   desc 'Builds the qsome-core lua scripts'
   task :build do
-    Dir.chdir(some_core_dir) do
+    Dir.chdir('lib/qsome/qsome-core') do
       sh 'make clean && make'
       sh 'cp qsome.lua ../lua'
     end
