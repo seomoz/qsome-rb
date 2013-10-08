@@ -17,7 +17,7 @@ describe Qsome::Queue, :integration do
     # First, make sure that it raises an exception
     expect do
       queue.recur('foo', 1, {}, 10)
-    end.to raise_exception
+    end.to raise_exception(NotImplementedError)
     pending('This is not required yet, so it remains unimplemented')
   end
 

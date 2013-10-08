@@ -5,7 +5,7 @@ require 'qless/job'
 module Qsome
   # Represents a job in qsome
   class Job < Qless::Job
-    attr_reader :hsh
+    attr_reader :hash
 
     def self.build(client, klass, attributes = {})
       raise NotImplementedError.new
@@ -13,7 +13,7 @@ module Qsome
 
     def initialize(client, atts)
       super(client, atts)
-      @hsh = atts['hash']
+      @hash = atts['hash']
     end
 
     def queue
@@ -23,7 +23,7 @@ module Qsome
     # Move this from it's current queue into another
     def move(queue, opts = {})
       note_state_change :move do
-        @client.call('put', queue, @jid, @klass_name, hsh,
+        @client.call('put', queue, @jid, @klass_name, hash,
                      JSON.dump(opts.fetch(:data, @data)),
                      opts.fetch(:delay, 0),
                      'priority', opts.fetch(:priority, @priority),

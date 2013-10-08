@@ -12,7 +12,7 @@ describe Qsome::Job, :integration do
   let(:job) { client.jobs[queue.put('Foo', 1, {})] }
 
   it 'exposes its hash' do
-    expect(job.hsh).to eq(1)
+    expect(job.hash).to eq(1)
   end
 
   it 'exposes its queue name properly' do
@@ -28,13 +28,13 @@ describe Qsome::Job, :integration do
   it 'has no build utility' do
     expect do
       Qsome::Job.build(client, 'Foo')
-    end.to raise_exception
+    end.to raise_exception(NotImplementedError)
   end
 
   it 'can move itself' do
     job.move('another')
     obj = client.jobs[job.jid]
     expect(obj.queue_name).to eq('another')
-    expect(obj.hsh).to eq(1)
+    expect(obj.hash).to eq(1)
   end
 end

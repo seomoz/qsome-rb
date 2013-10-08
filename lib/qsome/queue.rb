@@ -5,12 +5,12 @@ require 'qless/queue'
 module Qsome
   # Represents a queue in Qsome
   class Queue < Qless::Queue
-    def put(klass, hsh, data, opts = {})
+    def put(klass, hash, data, opts = {})
       opts = job_options(klass, data, opts)
       @client.call('put', @name,
                    (opts[:jid] || Qless.generate_jid),
                    klass.is_a?(String) ? klass : klass.name,
-                   hsh,
+                   hash,
                    JSON.generate(data),
                    opts.fetch(:delay, 0),
                    'priority', opts.fetch(:priority, 0),
@@ -20,7 +20,7 @@ module Qsome
       )
     end
 
-    def recur(klass, hsh, data, interval, opts = {})
+    def recur(klass, hash, data, interval, opts = {})
       raise NotImplementedError.new
     end
 
@@ -28,6 +28,7 @@ module Qsome
     def pop(count = nil)
       jids = JSON.parse(@client.call('pop', @name, worker_name, (count || 1)))
       jobs = jids.map { |j| Job.new(@client, j) }
+      # If no count was provided, return a job. Otherwise, return an array
       count.nil? ? jobs[0] : jobs
     end
 
@@ -35,6 +36,7 @@ module Qsome
     def peek(count = nil)
       jids = JSON.parse(@client.call('peek', @name, (count || 1)))
       jobs = jids.map { |j| Job.new(@client, j) }
+      # If no count was provided, return a job. Otherwsie, return an array
       count.nil? ? jobs[0] : jobs
     end
 
