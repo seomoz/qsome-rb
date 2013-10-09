@@ -1,5 +1,6 @@
 # Encoding: utf-8
 
+require 'qless'
 require 'qless/queue'
 
 module Qsome
