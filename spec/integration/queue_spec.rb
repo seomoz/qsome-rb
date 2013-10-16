@@ -49,4 +49,11 @@ describe Qsome::Queue, :integration do
     queue.resize(10)
     expect(queue.subqueues.length).to eq(10)
   end
+
+  it 'can pop jobs with a large number of queues' do
+    count = 10000
+    queue.resize(count)
+    jids = count.times.map { |i| queue.put('Foo', i, {}) }
+    expect(queue.pop(count).length).to eq(count)
+  end
 end

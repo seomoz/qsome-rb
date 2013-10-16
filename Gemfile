@@ -4,5 +4,5 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'qless',
-    :git => 'git://github.com/seomoz/qless.git',
-    :ref => 'c862871c94d2e8dadab2a5e6eba4d1c90191a542'
+    git: 'git://github.com/seomoz/qless.git',
+    ref: '300c6482e324e73612accff8074edc6802b606e3'

@@ -8,7 +8,7 @@ module Qsome
   class Queue < Qless::Queue
     def put(klass, hash, data, opts = {})
       opts = job_options(klass, data, opts)
-      @client.call('put', @name,
+      @client.call('put', @client.worker_name, @name,
                    (opts[:jid] || Qless.generate_jid),
                    klass.is_a?(String) ? klass : klass.name,
                    hash,
