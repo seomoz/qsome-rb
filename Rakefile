@@ -14,20 +14,23 @@ end
 
 # Tasks surrounding qsome/core
 namespace :core do
-  qsome_core_dir = './lib/qsome/qsome-core'
+  qsome_core_dir = 'lib/qsome/qsome-core'
 
   desc 'Builds the qsome-core lua scripts'
   task :build do
-    Dir.chdir('lib/qsome/qsome-core') do
+    Dir.chdir(qsome_core_dir) do
+      sh 'mkdir -p ../lua'
       sh 'make clean && make'
-      sh 'cp qsome.lua ../lua'
+      sh 'cp qsome.lua qsome-lib.lua ../lua'
     end
   end
 
   task :update_submodule do
     Dir.chdir(qsome_core_dir) do
       sh 'git checkout master'
-      sh 'git pull --rebase'
+      sh 'git pull --rebase origin master'
+      sh 'git submodule init'
+      sh 'git submodule update'
     end
   end
 
