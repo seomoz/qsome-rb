@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |gem|
   gem.name        = 'qsome'
-  gem.version     = '0.1.0'
+  gem.version     = '0.1.1'
   gem.date        = '2013-10-02'
   gem.summary     = 'Qsome Queueing'
   gem.description = 'Queues comprised of subqueues'
@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.email       = 'dan@moz.com'
   gem.files       = %w{README.md Gemfile} +
                     Dir.glob('lib/**/*.rb') +
+                    Dir.glob('lib/qsome/*.lua') +
                     Dir.glob('bin/*.rb')
 
   gem.add_development_dependency 'rake',         '~> 10'
