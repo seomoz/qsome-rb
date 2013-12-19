@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.email       = 'dan@moz.com'
   gem.files       = %w{README.md Gemfile} +
                     Dir.glob('lib/**/*.rb') +
+                    Dir.glob('lib/qsome/*.lua') +
                     Dir.glob('bin/*.rb')
 
   gem.add_development_dependency 'rake',         '~> 10'
