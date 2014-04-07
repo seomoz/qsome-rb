@@ -55,5 +55,26 @@ module Qsome
     def subqueues
       JSON.parse(@client.call('queue.subqueues', @name))
     end
+
+    # Get configuration for this queue
+    def config(key=nil, value=nil)
+      if key.nil?
+        JSON.parse(@client.call('queue.config', @name))
+      elsif value.nil?
+        @client.call('queue.config', @name, key)
+      else
+        @client.call('queue.config', @name, key, value)
+      end
+    end
+
+    # Get the concurrency limit for this queue
+    def concurrency
+      (config('concurrency') || 1).to_i
+    end
+
+    # Set the concurrency limit for this queue
+    def concurrency=(limit)
+      config('concurrency', limit)
+    end
   end
 end

@@ -56,4 +56,23 @@ describe Qsome::Queue, :integration do
     jids = count.times.map { |i| queue.put('Foo', i, {}) }
     expect(queue.pop(count).length).to eq(count)
   end
+
+  it 'can get its concurrency' do
+    expect(queue.concurrency).to eq(1)
+  end
+
+  it 'can set its concurrency' do
+    queue.concurrency = 10
+    expect(queue.concurrency).to eq(10)
+  end
+
+  it 'can get all of the configuration' do
+    queue.config('foo', 'bar')
+    expect(queue.config).to eq({'foo' => 'bar'})
+  end
+
+  it 'can get single configuration values' do
+    queue.config('foo', 'bar')
+    expect(queue.config('foo')).to eq('bar')
+  end
 end
