@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    qsome (0.1.0)
+    qsome (0.1.1)
 
 GEM
   remote: https://rubygems.org/
